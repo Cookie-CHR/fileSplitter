@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class draw{
-
+	/**Funzione nata per comodità, per disegnare in fretta parti della gui*/
 	public static void FileIcon (Graphics g, String type, String barType, int x1, int y1, String fileName) {
+	/**Disegna un pannello con dentro il disegno di un file e, sotto, il nome del file stesso*/
 		Color[] colorArray = return3Colors(barType);
 		int w=100;
 		int h=120;
@@ -17,8 +18,10 @@ public class draw{
 		g.drawString(fileName,x1+10,y1+h-10);
 	}
 	public static void Bar(Graphics g, String type, int x1, int y1, int x2, int y2) {
+		/**disegna una barra, dal colore definito da type*/
 		Color[] colorArray = return3Colors(type);
 
+		/**Esterno della barra (parte scura)*/
 		g.setColor(colorArray[0]);
 		for(int i=0;i<3;i+=2) {
 			g.drawLine(x1+(i-2), y1+i, x2+(i-2), y2+i);
@@ -27,20 +30,25 @@ public class draw{
 			g.drawLine(x2+(i-1), y2-1, x2+(1-i), y2+1);
 		}
 		
+		/**Parte media della barra*/
 		g.setColor(colorArray[1]);
 		for(int i=0;i<2;i++) {
 			g.drawLine(x1+(i-1), y1+i, x2+(i-1), y2+i);
 			g.drawLine(x1+i, y1+(i-1), x2+i, y2+(i-1));
 		}
 		
+		/**Interno della barra (parte "chiara")*/
 		g.setColor(colorArray[2]);
 		g.drawLine(x1, y1, x2, y2);
 	}
 	
 	public static void BorderedPanel(Graphics g, String type, String barType, int x1, int y1, int w, int h) {
+		/**Usando la funzione Bar di cui sopra, creo un rettangolo di barre con un interno pieno o vuoto*/
 		Color[] colorArray = return3Colors(type);
 
+		/**Se l'interno è vuoto non lo disegno, sennò...*/
 		if(!type.equals("empty")) {
+			/**Disegno l'interno del pannello*/
 			g.setColor(colorArray[0]);
 			g.fillRect(x1, y1, w, h);
 		
@@ -51,6 +59,7 @@ public class draw{
 			g.fillRect(x1+5, y1+5, w-10, h-10);
 		}
 		
+		/**Barre di contorno*/
 		draw.Bar(g,barType,x1,y1,x1+w,y1);
 		draw.Bar(g,barType,x1,y1,x1,y1+h);
 		draw.Bar(g,barType,x1+w,y1,x1+w,y1+h);
@@ -58,7 +67,7 @@ public class draw{
 	}
 	
 	public static void FileDrawing(Graphics g, int x1, int y1, int w, int h) {
-		
+		/**Disegno stilizzato di un icona "file"*/
 		int[] xs = {x1, x1+(3*w/4),x1+w,x1+w,x1};
 		int[] ys = {y1, y1, y1+(h/4),y1+h,y1+h};
 		g.drawPolygon(xs,ys,5);
@@ -78,6 +87,7 @@ public class draw{
 	
 	private static Color[] return3Colors(String type) 
 	{
+		/**Questa funzione ritorna un array di tre colori per ogni materiale passato*/
 		Color colorArray[]= new Color[3];
 		if (type.equals("bronze")) {
 			colorArray[0] = new Color(80,10,0);
@@ -93,12 +103,6 @@ public class draw{
 			colorArray[0] = new Color(80,50,10);
 			colorArray[1] = new Color(210,140,30);
 			colorArray[2] = new Color(255,220,100);
-		}
-		if (type.equals("paper")) {
-
-			colorArray[0] = new Color(175,140,40);
-			colorArray[1] = new Color(205,175,90);
-			colorArray[2] = new Color(235,210,140);
 		}
 		if (type.equals("whiteScreen")) {
 
