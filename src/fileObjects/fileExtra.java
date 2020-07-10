@@ -21,11 +21,11 @@ public abstract class fileExtra extends filedim
 	@Override
 	public void split(int dim){
 		/**salva il nome del file originale e il suo path*/
-		String filename=filePrincipale.getName();
 		String filePath = this.getFile().getPath().substring(0,this.getFile().getPath().length()-this.getFile().getName().length());
 		
 		/**applica la funzione extra al file e lo divide in parti, data la dimensione*/
 		extra(filePrincipale);
+		String filename=filePrincipale.getName();
 		
 		super.split(dim);
 		filePrincipale = new File(filePath+"d"+filePrincipale.getName()+1);
@@ -43,7 +43,7 @@ public abstract class fileExtra extends filedim
 		 * così sarà possibile capire che è un file con extra */
 		Path source = Paths.get(dFile.getAbsolutePath());
 		try {
-		Files.move(source, source.resolveSibling(idLetter+filename+".zip1"),StandardCopyOption.REPLACE_EXISTING);}
+		Files.move(source, source.resolveSibling(idLetter+filename+"1"),StandardCopyOption.REPLACE_EXISTING);}
 		catch(IOException e){
 			System.out.println("IOException");
 		}
