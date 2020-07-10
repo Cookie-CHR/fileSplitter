@@ -12,7 +12,6 @@ import gui.guiLabel;
 import java.awt.event.*;
 import java.awt.*;
 
-import java.lang.InterruptedException;
 import java.io.FileNotFoundException;
 
 public class splitOrJoin implements ActionListener
@@ -103,6 +102,9 @@ public class splitOrJoin implements ActionListener
 		guiLoadingBar lb = new guiLoadingBar();	
 		
 		createAndShowFrames(gq, lb);
+		/**Creo il thread per la loading bar e lo avvio*/
+		Thread loadT = new Thread(lb);
+		loadT.start();
 		/**Per ogni file in coda...*/
 		for(int i=0;i<l.size();i++) {
 			/**Prendo il file in posizione I*/
@@ -131,17 +133,9 @@ public class splitOrJoin implements ActionListener
 			
 			/**Mostro i progressi tramite barra di caricamento e coda*/
 			gq.showQueue();
-			try {
-				lb.setTo(100/l.size()*(i+1));
-				lb.showLoad();
-			}
-			catch(InterruptedException exc)
-			{
-				/**Questo catch si attiva se il programma viene interrotto durante lo sleep della barra di caricamento.
-				 * Segnalo il problema all'utente.*/
-				System.out.println("Il programma è stato chiuso durante lo svolgimento.\nAlcuni file potrebbero non essere stati elaborati correttamente.");
-			}
+			lb.setTo(100/l.size()*(i+1));
 		}
+		lb.showLoad();
 		/**L'operazione è finita, mando un messaggio all'utente*/
 		JFrame f = new JFrame();
 		guiLabel finished = new guiLabel("Operazione completata.", "gold",JLabel.CENTER);
