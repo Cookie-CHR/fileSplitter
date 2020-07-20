@@ -5,7 +5,7 @@ import guiPanels.guiHome;
 
 public class main
 {
-	
+	/**Da qui partirà l'esecuzione del programma*/	
 	public static void main(String args[])
 	{
 		/** crea un nuovo JFrame inizialmente invisibile
