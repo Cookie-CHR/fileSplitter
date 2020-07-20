@@ -1,5 +1,5 @@
 package functionsAndStructs;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import java.io.File;
 import javax.swing.*;
@@ -12,13 +12,12 @@ import gui.guiLabel;
 import java.awt.event.*;
 import java.awt.*;
 
-import java.io.FileNotFoundException;
 
 public class splitOrJoin implements ActionListener
 {	
 	public void actionPerformed(ActionEvent e){
 		/**Faccio scegliere all'utente i file desiderati, e li metto in una coda*/
-		Vector<file> l = commonFunctions.getChosenFiles();	
+		ArrayList<file> l = commonFunctions.getChosenFiles();	
 		/**Se l'utente ha chiuso il JFileChooser senza scegliere nessun file non faccio nulla, altrimenti...*/
 		if(l.size()!=0) {
 			/**A questo punto, vediamo cosa l'utente ha detto di fare ai file*/
@@ -39,7 +38,7 @@ public class splitOrJoin implements ActionListener
 			else {
 				/**Occorre effetuare il join su file*/
 				/**Non serve specificare parametri, basta avviare la divisione*/
-				execute("joinB",l, new Vector<>());
+				execute("joinB",l, new ArrayList<>());
 			}	
 		}
 	}
@@ -89,13 +88,13 @@ public class splitOrJoin implements ActionListener
 		
 		/**Rendo visibile la finestra mettendola in un nuovo JFrame*/
 		JFrame selectorFrame = new JFrame("Seleziona i parametri");
-		selectorFrame.setBounds(670,0,690,700);
+		selectorFrame.setBounds(670,0,690,600);
 
 		selectorFrame.add(scrollSelector);
 		selectorFrame.setVisible(true);
 	}
 	
-	public static void execute(String source, Vector<file> l, Vector<Integer> parameters) {
+	public static void execute(String source, ArrayList<file> l, ArrayList<Integer> parameters) {
 		/**Creo una guiQueue e una barra di caricamento.
 		 * Verranno entrambe usate per seguire agevolmente il procedimento*/
 		guiQueue gq = new guiQueue(l);
@@ -110,13 +109,7 @@ public class splitOrJoin implements ActionListener
 			/**Prendo il file in posizione I*/
 			file f=l.get(i);
 			if(source.equals("splitB")) {
-				/**Avvio la divisione*/
-				try {
 				f.split(parameters.get(i));
-				}
-				catch(FileNotFoundException fileNotFound) {
-					System.out.println("Filenotfound");
-				}
 			}else{
 				/**Controllo se il file in questione è un filecrypt  un filezip*/
 				if(f.getFile().getName().substring(0, 1).equals("c")) {
@@ -141,7 +134,6 @@ public class splitOrJoin implements ActionListener
 		guiLabel finished = new guiLabel("Operazione completata.", "gold",JLabel.CENTER);
 		f.add(finished);
 		f.setBounds(570,300,250,125);
-		/**Metto il frame al centro*/
 		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

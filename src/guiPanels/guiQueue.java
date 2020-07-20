@@ -8,21 +8,21 @@ import fileObjects.file;
 import java.util.*;
 
 public class guiQueue extends JPanel {
-	Vector<file> queue;
+	ArrayList<file> queue;
 	
-	public guiQueue(Vector<file> newQueue) {
+	public guiQueue(ArrayList<file> newQueue) {
 		/**Inizializza una nuova coda*/
 		queue=newQueue;
 	}
 	public guiQueue() {
 		/**Inizializza una nuova coda, lasciata vuota di default*/
-		queue=new Vector<file>();
+		queue=new ArrayList<file>();
 	}
-	public Vector<file> getQueue(){
+	public ArrayList<file> getQueue(){
 		/**Restituisce in output la coda di file*/
 		return queue;
 	}
-	public void setQueue(Vector<file> newQueue){
+	public void setQueue(ArrayList<file> newQueue){
 		/**Sostituisce la coda salvata con una nuova, da input*/
 		queue=newQueue;
 	}
@@ -40,7 +40,7 @@ public class guiQueue extends JPanel {
 		revalidate();
 		repaint();
 	}
-	public void showQueue(Vector<file> newQueue) {
+	public void showQueue(ArrayList<file> newQueue) {
 		/**Disegna la coda passata in input*/
 		queue=newQueue;
 		repaint();

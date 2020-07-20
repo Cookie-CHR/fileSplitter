@@ -30,7 +30,7 @@ public class file
 		return filePrincipale;
 	}
 	
-	public void split(int a) throws FileNotFoundException {}
+	public void split(int a) {}
 	
 	public void join(File file_1) {
 		/**tolgo l'1 dalla fine del nome del file*/

@@ -2,7 +2,7 @@ package functionsAndStructs;
 
 import java.io.*;
 import java.util.Arrays;
-import java.util.Vector;
+import java.util.ArrayList;
 import javax.swing.*;
 
 import fileObjects.file;
@@ -38,7 +38,7 @@ public class commonFunctions
 		}
 	}
 	
-	public static Vector<file> getChosenFiles(){
+	public static ArrayList<file> getChosenFiles(){
 		/** crea il Jframe da cui selezioneremo i file*/
 		JFrame sPanel = new JFrame("Seleziona i file");
 		
@@ -48,15 +48,15 @@ public class commonFunctions
 		fileChooser.showOpenDialog(sPanel);
 		
 		/**Ritorna i file scelti sotto forma di una variabile di tipo Vector<file>*/
-		/**fileChooser.getSelectedFiles() ritorna una lista di file,
-		 * Arrays.asList la trasforma in un vettore di File,
-		 * convert lo trasformerà invece in un vettore di tipo file(minuscolo).*/
-		return new Vector<file>(commonFunctions.convert(new Vector<File>(Arrays.asList(fileChooser.getSelectedFiles()))));
+		/**fileChooser.getSelectedFiles() ritorna un array di File,
+		 * Arrays.asList la trasforma in una lista di File,
+		 * convert lo trasformerà invece in una lista di tipo file(minuscolo).*/
+		return new ArrayList<file>(commonFunctions.convert(new ArrayList<File>(Arrays.asList(fileChooser.getSelectedFiles()))));
 	}
-	private static Vector<file> convert(Vector<File> v) 
+	private static ArrayList<file> convert(ArrayList<File> v) 
 	{
-		/**Trasforma un vettore di File (maiuscolo) in uno di file (minuscolo).*/
-		Vector<file> vfile = new Vector<file>();
+		/**Trasforma una lista di File (maiuscolo) in una di file (minuscolo).*/
+		ArrayList<file> vfile = new ArrayList<file>();
 		for(File elem:v) {
 			vfile.add(new file(elem));
 		}

@@ -2,7 +2,6 @@ package functionsAndStructs;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 import fileObjects.*;
 import gui.guiBorder;
@@ -10,7 +9,7 @@ import gui.guiLabel;
 
 import java.awt.event.*;
 
-public class parameterStruct implements ActionListener
+public class parameterStruct
 {
 	private file queueFile;
 	private int p;
@@ -69,6 +68,7 @@ public class parameterStruct implements ActionListener
 		structPanel.add(nomeFile,c);
 		
 		/**Creo un pannello in cui mettere tutti i JRadioButton che creerò in seguito*/
+		/**Ho fornito, come commento monolineare, anche il codice per l'aggiunta del bottone per il filecrypt*/
 		JPanel radioPanel = new JPanel();
 		radioPanel.setLayout(new GridLayout(0,1,10,10));
 		radioPanel.setBackground(Color.white);
@@ -84,12 +84,12 @@ public class parameterStruct implements ActionListener
 		 * I JRadioButton rappresenteranno la modalità di divisione*/
 		JRadioButton b1 = new JRadioButton("Dividi data la dimensione");
 		JRadioButton b2 = new JRadioButton("Dividi dato il numero parti");
-		JRadioButton b3 = new JRadioButton("Dividi e crypta");
+		//JRadioButton b3 = new JRadioButton("Dividi e crypta");
 		JRadioButton b4 = new JRadioButton("Dividi e comprimi");
 		
 		b1.setActionCommand("b1");
 		b2.setActionCommand("b2");
-		b3.setActionCommand("b3");
+		//b3.setActionCommand("b3");
 		b4.setActionCommand("b4");
 		
 		/**Faccio sì che un bottone sia già preselezionato, per evitare valori nulli*/
@@ -98,20 +98,19 @@ public class parameterStruct implements ActionListener
 		/**Li aggiungo ad uno stesso ButtonGroup*/
 		choice.add(b1); 
 		choice.add(b2); 
-		choice.add(b3);
+		//choice.add(b3);
 		choice.add(b4);
 		 
 		/**Metto i radio button nel radioPanel apposito*/
 		radioPanel.add(b1);
 		radioPanel.add(b2);
-		radioPanel.add(b3);
+		//radioPanel.add(b3);
 		radioPanel.add(b4);
 		
 		/**Aggiungo anche una textbox in cui inserire il parametro*/
 		txt.setBorder(new guiBorder((first)?("gold"):("metal"), 10));
 		
 		txt.setName(queueFile.getFile().getName());
-		txt.addActionListener(this);
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
@@ -174,10 +173,4 @@ public class parameterStruct implements ActionListener
 			p = 1;
 		}
 	}	
-	
-	
-	public void actionPerformed(ActionEvent e){
-		// legge il testo in txt1
-		System.out.println("#"+ txt.getText()+txt.getName()+"#");
-	}
 }

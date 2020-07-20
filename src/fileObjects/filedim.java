@@ -45,6 +45,7 @@ public class filedim extends file
 		 * dovrà essere uguale al path del file principale, ma
 		 * escludiamo dalla fine del path il nome di quest'ultimo usando substring*/
 		String filePath = this.getFile().getPath().substring(0,this.getFile().getPath().length()-this.getFile().getName().length());
+		
 		for(long fileLength=filePrincipale.length();fileLength>dim;i++, fileLength-=dim) {
 			File splittedFile=new File(filePath+'d'+filePrincipale.getName()+(i+1));
 			

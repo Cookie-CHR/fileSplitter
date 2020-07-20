@@ -10,12 +10,12 @@ import gui.*;
 import java.util.*;
 
 public class guiQueueParSelect extends JPanel implements ActionListener {
-	private Vector<parameterStruct> struct;
+	private ArrayList<parameterStruct> struct;
 	
 	
-	public guiQueueParSelect(Vector<file> newQueue) {
-		struct = new Vector<parameterStruct>(newQueue.size());
-		/**Inizializza il vettore di parameterStruct*/
+	public guiQueueParSelect(ArrayList<file> newQueue) {
+		struct = new ArrayList<parameterStruct>(newQueue.size());
+		/**Inizializza la lista di parameterStruct*/
 		for(int i=0;i<newQueue.size();i++) {
 			struct.add(new parameterStruct(newQueue.get(i)));
 			/**Per ogni elemento in coda, setto lo stesso actionlistener*/
@@ -26,27 +26,27 @@ public class guiQueueParSelect extends JPanel implements ActionListener {
 		
 	}
 	public guiQueueParSelect() {
-		struct = new Vector<parameterStruct>();
-		/**Inizializza il vettore di parameterStruct, lasciato vuoto di default*/
+		struct = new ArrayList<parameterStruct>();
+		/**Inizializza la lista di parameterStruct, lasciata vuota di default*/
 	}
 	
-	public Vector<file> getQueue(){
+	public ArrayList<file> getQueue(){
 		/**Restituisce in output la coda di file*/
-		Vector<file>queue = new Vector<file>();
+		ArrayList<file>queue = new ArrayList<file>();
 		for(parameterStruct singlet:struct)
 			queue.add(singlet.getFile());
 		return queue;
 	}
-	public void setQueue(Vector<file> newQueue){
+	public void setQueue(ArrayList<file> newQueue){
 		/**Sostituisce la coda salvata con una nuova, da input*/
-		struct = new Vector<parameterStruct>(newQueue.size());
-		/**Inizializza il vettore di parameterStruct*/
+		struct = new ArrayList<parameterStruct>(newQueue.size());
+		/**Inizializza la lista di parameterStruct*/
 		for(int i = 0; i<newQueue.size();i++)
 		struct.set(i, new parameterStruct(newQueue.get(i)));
 	}
-	public Vector<Integer> getParameters(){
-		/**Restituisce in output il vettore di parametri*/
-		Vector<Integer> par = new Vector<Integer>();
+	public ArrayList<Integer> getParameters(){
+		/**Restituisce in output la lista di parametri*/
+		ArrayList<Integer> par = new ArrayList<Integer>();
 		for(parameterStruct singlet:struct)
 			par.add(singlet.getParameter());
 		return par;
@@ -63,7 +63,7 @@ public class guiQueueParSelect extends JPanel implements ActionListener {
 		int i=0;
 		for(parameterStruct singlet:struct)
 		{
-			/**Lo aggiungo*/
+			/**Aggiungo il pannello alla schermata*/
 			this.add(singlet.getPanel());
 			/**Tengo il conto del numero di pannelli presenti*/
 			i++;
@@ -100,7 +100,7 @@ public class guiQueueParSelect extends JPanel implements ActionListener {
 		
 		if (source .equals("confirm")) {
 			/**La formazione è stata confermata.
-			 * applichiamo le dovute modifiche alla coda di file e all'array di parametri*/
+			 * applichiamo le dovute modifiche alla coda di file e alla lista di parametri*/
 		
 			/**Per ogni file in coda...*/
 			for(parameterStruct singlet:struct) {
@@ -123,7 +123,7 @@ public class guiQueueParSelect extends JPanel implements ActionListener {
 				}
 			}
 			/**Infine, una volta aggiornati tutti i parametri, avvio la divisione*/
-			System.out.println("");
+			
 			splitOrJoin.execute("splitB",getQueue(), getParameters());
 		}
 		else if (source.equals("erase")){
@@ -171,8 +171,8 @@ public class guiQueueParSelect extends JPanel implements ActionListener {
 			parameterStruct elem = findResponsible(e);
 			int index = struct.indexOf(elem);
 			if (index != struct.size()-1){
-				/**Se il file non è già il primo della coda,
-				 * lo sposto di un'ulteriore posizione in avanti*/
+				/**Se il file non è già l'ultimo della coda,
+				 * lo sposto di un'ulteriore posizione all'indietro*/
 				parameterStruct temp = new parameterStruct();
 				temp = struct.get(index+1);
 				struct.set(index+1, elem);
@@ -186,12 +186,12 @@ public class guiQueueParSelect extends JPanel implements ActionListener {
 		}
 		else if (source.equals("newF")) {
 			/**Occorre aggiungere uno o più file alla coda*/
-			/**Utilizziamo ancora il JFileChooser per avere un vettore di file*/
-			Vector<file> newQueue = commonFunctions.getChosenFiles();
-			/**Memorizzo qual è la lunghezza del vettore prima dell'aggiunta dei nuovi elementi*/
+			/**Utilizziamo ancora il JFileChooser per avere una lista di file*/
+			ArrayList<file> newQueue = commonFunctions.getChosenFiles();
+			/**Memorizzo qual è la lunghezza della lista prima dell'aggiunta dei nuovi elementi*/
 			int oldMax = struct.size();
 			
-			/**Aggiungiamo i nuovi file alla vecchia struct*/
+			/**Aggiungiamo i nuovi file alla vecchia coda*/
 			for(int i=0;i<newQueue.size();i++) {
 				struct.add(new parameterStruct(newQueue.get(i)));
 				/**Per ogni elemento in coda, setto lo stesso actionlistener*/
